@@ -12,14 +12,24 @@ namespace OOP_Hw1
 	{
 	}
 
-	//copy c'tor - necassary here?
-	/*
+	// copy c'tor
 	ShoeStore::ShoeStore(const ShoeStore& other)
 	{
 		ShoeStorage shoeStorage = other.shoeStorage;
-		double currentDiscountPrecent = other.currentDiscountPercent;
+		double currentDiscountPrecent = other.currentDiscountPrecent;
 	}
-	*/
+
+	// assignment operator
+	//doesn't have to be a member func? 
+	ShoeStore& ShoeStore:: operator=(const ShoeStore& other)
+	{
+		if (this != &other)
+		{
+			this->shoeStorage = other.shoeStorage;
+			this->currentDiscountPrecent = other.currentDiscountPrecent;
+		}
+		return *this;
+	}
 
 
 	void ShoeStore:: SetDiscountPercent(int discount)
@@ -45,32 +55,27 @@ namespace OOP_Hw1
 		int i = amount;
 		while (amount > 0)
 		{
-			ShoeStorage::AddPairOfShoes(name);
+			PairOfShoes newShoe = PairOfShoes(name, price);
+			shoeStorage.AddPairOfShoes(newShoe);
 			amount--;
 
 			//
 		}
-		PairOfShoes::SetPrice(price); // all shoes with same name have the same price
-		
-
 	}
 
 	void ShoeStore::RemoveOnePair(const std::string& name)
 	{
-		ShoeStorage::RemovePairOfShoes(name);
+		shoeStorage.RemovePairOfShoes(name);
 	}
 
 	double ShoeStore::AverageShoePrice() const //  price of all shoes after discount
 	{
-		//sum all shoes with the same name.
-		//divide by number of shoes = lastUsed
-		//duplicate by discount/100
+		
+		return shoeStorage.AverageShoePrice() * GetDiscountPercent();
+
 	}
 	double ShoeStore::GetShoePrice(const std::string& shoeName) const //after discount
 	{
-		double temp;
-		
-
-		return (this->PairOfShoes::GetPrice(shoeName)* GetDiscountPercent/100);
+		return (shoeStorage.GetPrice(shoeName)* GetDiscountPercent()/100);
 	}
 }

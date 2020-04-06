@@ -20,6 +20,12 @@ namespace OOP_Hw1 {
 
 		double AverageShoePrice() const;
 		double GetShoePrice(const std::string& shoeName) const;
+
+		//d'tor c'tor
+		~ShoeStore()
+		{
+			delete &shoeStorage;
+		}
 	};
 }
 

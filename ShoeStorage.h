@@ -7,8 +7,9 @@
 namespace OOP_Hw1 {
 	class ShoeStorage
 	{
-		PairOfShoes** shoes; // Array of pointers to PairOfShoes. Some of them are NULL
+		PairOfShoes** shoes; // Array of pointers to PairOfShoes. Some of them are nullptr
 		int arraySize;
+		int lastUsed = 0;
 	public:
 		ShoeStorage(int initStorageSize = DEFAULT_INIT_STORAGE_SIZE);
 

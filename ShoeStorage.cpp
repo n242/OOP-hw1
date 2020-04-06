@@ -3,34 +3,25 @@
 #include <string>
 //#define DEFAULT_INIT_STORAGE_SIZE 4
 
-
-int static arraySize =4;
+//define as interest? 
+//int static arraySize =4;
 int static lastUsed = 0;
+
 
 
 namespace OOP_Hw1 {
 
-	/*class ShoeStorage
-	{
-		
-	public:
-
-		//static int** shoes;
-		//static int arraySize;
-		ShoeStorage(int** shoes, int arraySize) : shoes(shoes), arraySize(arraySize)
-		{};
-
-		
-	};
-	*/
 
 	// assignment operator
+	//doesn't have to be a member func? 
 	ShoeStorage& ShoeStorage:: operator=(const ShoeStorage& other)
 	{
 		if (this != &other)
 		{
+			
 			delete[] this->shoes;
 
+			// create new pair of shoes as temp - will fix the issue
 			this->shoes = new ShoeStorage *[other.arraySize];
 			for(int i =0 ; i<other.arraySize; i++)
 			{
@@ -51,14 +42,15 @@ namespace OOP_Hw1 {
 	}
 
 	//default c'tor
-	//is this necessary? to initialize all to NULL
+	//is this necessary? to initialize all to nullptr
 	ShoeStorage::ShoeStorage(int initStorageSize)
 	{
 		arraySize = DEFAULT_INIT_STORAGE_SIZE;
+		int static lastUsed = 0;
 		int i;
 		for (i = 0; i < arraySize; i++)
 		{
-			shoes[i] = NULL;
+			shoes[i] = nullptr;
 		}
 	}
 	
@@ -74,7 +66,7 @@ namespace OOP_Hw1 {
 		}
 		else
 		{
-			shoes[lastUsed+1] = new PairOfShoes::PairOfShoes pair(pair.name ,pair.price);
+			shoes[lastUsed+1] = new PairOfShoes(pair.GetName() ,pair.GetPrice());
 			lastUsed++;
 		}
 
@@ -92,7 +84,7 @@ namespace OOP_Hw1 {
 
 		for(int i=arraySize; i<2*arraySize; i++)
 		{
-			newArr[i] = NULL;
+			newArr[i] = nullptr;
 		}
 		
 		
@@ -115,7 +107,7 @@ namespace OOP_Hw1 {
 					{
 						shoes[j] = shoes[j+1];
 					}
-					shoes[lastUsed] = NULL;
+					shoes[lastUsed] = nullptr;
 					lastUsed--;
 				}
 		}
