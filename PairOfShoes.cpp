@@ -6,11 +6,11 @@ namespace OOP_Hw1 {
 
 	// default c'tor - isn't necessary?
 
-	PairOfShoes::PairOfShoes(const std::string& name, double price)
-	{
-		name = this->GetName;// check if correct
-		price = 00.00;
-	}
+	//PairOfShoes::PairOfShoes(const std::string& name, double price = 0.0){}
+	
+		//name = this->GetName;// check if correct
+		//price = 00.00;
+	
 
 	
 	// check if const int or regular int

@@ -3,20 +3,22 @@
 #include <iostream> // IO
 #include <string>
 
-//#define DEFAULT_DISCOUNT 0.0
+#define DEFAULT_DISCOUNT 0.0
 
 namespace OOP_Hw1
 {
-	//default c'tor
-	ShoeStore::ShoeStore(double discountPercent = DEFAULT_DISCOUNT)
+	//default c'tor - necessary?
+	ShoeStore::ShoeStore(double discountPercent)
 	{
+		this->currentDiscountPrecent = discountPercent;
+		this->shoeStorage = shoeStorage;
 	}
 
 	// copy c'tor
 	ShoeStore::ShoeStore(const ShoeStore& other)
 	{
-		ShoeStorage shoeStorage = other.shoeStorage;
-		double currentDiscountPrecent = other.currentDiscountPrecent;
+		this->shoeStorage = other.shoeStorage;
+		this->currentDiscountPrecent = other.currentDiscountPrecent;
 	}
 
 	// assignment operator
@@ -50,7 +52,7 @@ namespace OOP_Hw1
 		return this->currentDiscountPrecent;
 	}
 
-	void ShoeStore::AddShoes(const std::string& name, double price, int amount = 1)
+	void ShoeStore::AddShoes(const std::string& name, double price, int amount)
 	{
 		int i = amount;
 		while (amount > 0)

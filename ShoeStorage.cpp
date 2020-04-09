@@ -18,27 +18,27 @@ namespace OOP_Hw1 {
 	{
 		if (this != &other)
 		{
-			
 			delete[] this->shoes;
-
-			// create new pair of shoes as temp - will fix the issue
-			this->shoes = new ShoeStorage *[other.arraySize];
-			for(int i =0 ; i<other.arraySize; i++)
+			this->arraySize = other.arraySize;
+			shoes = new PairOfShoes * [arraySize];
+			for(int i =0 ; i< this->arraySize; i++)
 			{
-				this->shoes[i] = other.shoes;
+				shoes[i] = other.shoes[i];
 			}
-
 			shoes = other.shoes;
-
 		}
 		return *this;
 	}
 
+	
+//		this->currentNumber = storage.currentNumber;
+
+
 	//copy c'tor
 	ShoeStorage::ShoeStorage(const ShoeStorage& other)
 	{
-		PairOfShoes** shoes = new PairOfShoes*[other.arraySize];
-		arraySize = other.arraySize;
+		this->shoes = new PairOfShoes*[other.arraySize];
+		this->arraySize = other.arraySize;
 	}
 
 	//default c'tor
@@ -48,6 +48,7 @@ namespace OOP_Hw1 {
 		arraySize = DEFAULT_INIT_STORAGE_SIZE;
 		int static lastUsed = 0;
 		int i;
+		shoes = new PairOfShoes * [DEFAULT_INIT_STORAGE_SIZE];
 		for (i = 0; i < arraySize; i++)
 		{
 			shoes[i] = nullptr;
@@ -55,7 +56,6 @@ namespace OOP_Hw1 {
 	}
 	
 
-	//apply assignment operator here too?
 	void ShoeStorage:: AddPairOfShoes(const PairOfShoes& pair)
 	{
 		
@@ -74,7 +74,7 @@ namespace OOP_Hw1 {
 
 	void ShoeStorage::duplicateArr(const PairOfShoes& pair)
 	{
-		PairOfShoes** newArr;
+		PairOfShoes** newArr = new PairOfShoes*[arraySize*2];
 
 		for (int i = 0; i < arraySize; i++)
 		{
@@ -82,32 +82,38 @@ namespace OOP_Hw1 {
 
 		}
 
-		for(int i=arraySize; i<2*arraySize; i++)
+		for(int j=arraySize; j<(2*arraySize); j++)
 		{
-			newArr[i] = nullptr;
+			newArr[j] = nullptr;
 		}
-		
 		
 		arraySize*=2;
 		shoes = newArr;
 
-		delete[]newArr;
+		for (int i = 0; i < arraySize; i++)
+		{
+			delete newArr[i];
+		}
+		
 	}
 
 
 	void ShoeStorage::RemovePairOfShoes(const std::string& shoeName)
 	{
-		int tempIndex;
+		int j;
 		for (int i = 0; i < lastUsed; i++)
 		{
 			if((shoes[i]->PairOfShoes::GetName()) == shoeName)
 				{
-					tempIndex = i;
-					for (int j = tempIndex; j <lastUsed; j++)
+					j = i;
+					while(j<lastUsed)
 					{
-						shoes[j] = shoes[j+1];
-					}
+						PairOfShoes *temp = shoes[j+1];
+						j++;
+						shoes[j] = temp;
+						}
 					shoes[lastUsed] = nullptr;
+					delete shoes[lastUsed];
 					lastUsed--;
 				}
 		}
@@ -116,12 +122,20 @@ namespace OOP_Hw1 {
 	{
 		for (int i = 0; i < lastUsed; i++)
 		{
-			if ((shoes[i]->PairOfShoes::GetName()) == shoeName)
+			if ((shoes[i]->GetName()) == shoeName)
 			{
-				return shoes[i]->PairOfShoes::GetPrice();
+				if ((!shoes[i]->GetPrice()))
+				{
+					std::cout << "error nullptr in shoe" << std::endl;
+					return 0.0;
+				}
+				else
+				{
+					
+					return shoes[i]->GetPrice();
+				}
+					
 			}
-
-			return 0.0;
 		}
 	}
 
@@ -142,8 +156,6 @@ namespace OOP_Hw1 {
 	//int** ShoeStorage:: shoes = 0;
 
 	
-	
-
 }
 
 

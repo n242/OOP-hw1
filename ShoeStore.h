@@ -21,6 +21,13 @@ namespace OOP_Hw1 {
 		double AverageShoePrice() const;
 		double GetShoePrice(const std::string& shoeName) const;
 
+		//copy c'tor
+		ShoeStore(const ShoeStore& other);
+
+		//assignment operator
+		ShoeStore& operator=(const ShoeStore& other);
+
+
 		//d'tor c'tor
 		~ShoeStore()
 		{

@@ -21,7 +21,7 @@ int main() {
 	std::cout << "**********************" << std::endl;
 
 	{
-		ShoeStore temporarySore = store; // copy constructor is called
+		ShoeStore temporarySore = store; // copy constructor is called + assignment operator!!!
 		temporarySore.RemoveOnePair(BOOTS);
 		temporarySore.RemoveOnePair(SANDLES);
 		std::cout << "Temporary store average shoe price: " << temporarySore.AverageShoePrice() << std::endl;

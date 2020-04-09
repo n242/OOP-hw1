@@ -37,7 +37,7 @@ namespace OOP_Hw1 {
 
 		double AverageShoePrice() const;
 
-		static int lastUsed;
+		//static int lastUsed;
 	};
 }
 
