@@ -2,27 +2,20 @@
 #include <iostream> // IO
 #include <string>
 
-namespace OOP_Hw1 {	
 
-	// default c'tor - isn't necessary?
+namespace OOP_Hw1 {
 
-	//PairOfShoes::PairOfShoes(const std::string& name, double price = 0.0){}
-	
-		//name = this->GetName;// check if correct
-		//price = 00.00;
-	
-
-	
-	// check if const int or regular int
+	// check if const 
 	void PairOfShoes::SetPrice(double newPrice) {
-		if (newPrice > 0)
-		{
+		if (newPrice > 0) {
 			this->price = newPrice;
 		}
-		else
+		else {
 			std::cout << "error price" << std::endl;
-
+			this->price = ZERO;
+		}
 	}
+
 	double PairOfShoes::GetPrice() const {
 		return this->price;
 	}

@@ -7,9 +7,13 @@
 namespace OOP_Hw1 {
 	class ShoeStore
 	{
+	private:
 		ShoeStorage shoeStorage;
 		double currentDiscountPrecent;
 	public:
+
+		// no dynamic allocation or need of applying assignment operator (default is enough), so not applying the
+		// big three
 		ShoeStore(double discountPercent = DEFAULT_DISCOUNT);
 
 		void SetDiscountPercent(int discount);
@@ -21,18 +25,5 @@ namespace OOP_Hw1 {
 		double AverageShoePrice() const;
 		double GetShoePrice(const std::string& shoeName) const;
 
-		//copy c'tor
-		ShoeStore(const ShoeStore& other);
-
-		//assignment operator
-		ShoeStore& operator=(const ShoeStore& other);
-
-
-		//d'tor c'tor
-		~ShoeStore()
-		{
-			delete &shoeStorage;
-		}
 	};
 }
-
